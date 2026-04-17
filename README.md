@@ -57,7 +57,7 @@ Each filament profile includes:
 - Consistent extrusion width logic across materials  
 
 ### Process Profiles
-Located under `process/`. Currently includes PETG/PCTG‑focused profiles only:
+Located under `process/`.
 
 - **PCTG & PETG – 0.20mm {DB} – P1S**
 
