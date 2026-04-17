@@ -1,6 +1,6 @@
 # OrcaSlicer Profiles for Bambu P1S (E3D DiamondBack 0.4 mm)
 
-A collection of empirically tuned OrcaSlicer profiles for the Bambu Lab P1S, calibrated specifically for the E3D DiamondBack 0.4 mm integrated hotend assembly. These profiles prioritize consistency, dimensional accuracy, and repeatable results across PCTG, PETG, PLA, and engineering filaments.
+A collection of empirically tuned OrcaSlicer profiles for the Bambu Lab P1S, calibrated specifically for the E3D DiamondBack 0.4 mm integrated hotend assembly. These profiles prioritize consistency, dimensional accuracy, and repeatable results across ASA, PCTG, PETG, and PLA. Other filament types may be added in the future, but this is not guaranteed.
 
 ---
 
