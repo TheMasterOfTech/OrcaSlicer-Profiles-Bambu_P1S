@@ -18,7 +18,7 @@ All profiles in this repository are tuned against a fixed, controlled hardware b
 - **Firmware:** Current stable Bambu Lab firmware at the time of tuning
 - **AMS:** Optional; profiles do not assume AMS usage
 - **Bed:** Stock textured PEI plate unless otherwise noted
-- **Environment:** Room ambient around 72–80 °F (outside the printer enclosure)
+- **Environment:** Room ambient around 72–80°F (22–27°C), measured *outside* the printer enclosure
 
 Because the DiamondBack is a fully integrated hotend, all tuning values in this repository—flow ratio, pressure advance, cooling percentages, extrusion widths, and speed limits—are calibrated specifically for the DiamondBack’s extrusion characteristics and should not be expected to behave identically on other nozzle or hotend types.
 
