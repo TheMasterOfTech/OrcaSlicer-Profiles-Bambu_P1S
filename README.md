@@ -20,6 +20,7 @@ __*Environment:*__ Room ambient around 72–80 °F (22–27 °C), measured outsi
 
 The DiamondBack is a complete hotend drop-in assembly, so all tuning values — flow, pressure advance, cooling behavior, extrusion widths, and speed limits — reflect its melt characteristics. These values won’t match what you’d expect from brass, hardened steel, or ruby nozzles.
 
+```
 orcaslicer-profiles-bambu_p1s/
 │
 ├── printer/
@@ -37,6 +38,7 @@ orcaslicer-profiles-bambu_p1s/
 ├── docs/
 │
 └── README.md
+```
 
 ## Included Profiles
 
