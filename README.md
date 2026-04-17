@@ -40,9 +40,33 @@ orcaslicer-profiles-bambu_p1s/
 
 ## Included Profiles
 
-Printer presets tuned for the DiamondBack’s melt behavior  
-Filament presets with calibrated flow, cooling, and PA  
-Process presets focused on dimensional accuracy, strength, and repeatability
+This repository includes tuned **filament** and **process** profiles for the Bambu Lab P1S using a 0.4 mm DiamondBack nozzle. Filament profiles are organized by material only. Specific brands or blends will be added later as they are tuned.
+
+### Filament Profiles
+Located under `filament/`, organized by material:
+
+- **PLA**
+- **PETG**
+- **PCTG**
+- **ABS**
+
+Each filament profile includes:
+- Flow ratio tuned for DiamondBack melt behavior  
+- Pressure advance values validated through real prints  
+- Cooling assumptions appropriate for the enclosed P1S  
+- Consistent extrusion width logic across materials  
+
+### Process Profiles
+Located under `process/`. Currently includes PETG/PCTG‑focused profiles only:
+
+- **PCTG & PETG – 0.20mm {DB} – P1S**
+
+Each process profile includes:
+- Speed hierarchy tuned for DiamondBack melt behavior  
+- Conservative acceleration for dimensional accuracy  
+- Clean seam behavior  
+- Strength‑oriented infill defaults  
+- No mid‑print bed temperature changes 
 
 ## How to Import
 
