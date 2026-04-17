@@ -23,13 +23,11 @@ The DiamondBack is a complete hotend drop-in assembly, so all tuning values — 
 ```
 orcaslicer-profiles-bambu_p1s/
 │
-├── printer/
-│
 ├── filament/
 │   ├── PLA/
 │   ├── PETG/
 │   ├── PCTG/
-│   └── ABS/
+│   └── ASA/
 │
 ├── process/
 │
