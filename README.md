@@ -1,67 +1,42 @@
 # OrcaSlicer Profiles for Bambu P1S (E3D DiamondBack 0.4 mm)
 
-A collection of empirically tuned OrcaSlicer profiles for the Bambu Lab P1S, calibrated specifically for the E3D DiamondBack 0.4 mm integrated hotend assembly. These profiles prioritize consistency, dimensional accuracy, and repeatable results across ASA, PCTG, PETG, and PLA. Other filament types may be added in the future, but this is not guaranteed.
-
----
+These profiles are tuned specifically for the Bambu Lab P1S equipped with the E3D DiamondBack 0.4 mm integrated hotend. The goal is simple: consistent extrusion, predictable behavior, and reliable results across PCTG, PETG, PLA, and other engineering‑grade materials.
 
 ## Hardware Assumptions
 
-All profiles in this repository are tuned against a fixed, controlled hardware baseline to ensure consistent and reproducible behavior. Every flow, pressure advance, cooling, and extrusion parameter assumes the following setup:
+Everything here is calibrated around a fixed hardware baseline so the profiles behave the same way for anyone using the same setup.
 
-- **Printer:** Bambu Lab P1S (factory motion system, stock belts, stock fans)
-- **Hotend Assembly:** E3D DiamondBack 0.4 mm — full integrated unit  
-  - This is a single-piece, sealed DiamondBack hotend  
-  - The nozzle is permanently integrated and cannot be removed or swapped  
-  - Melt zone length, thermal behavior, and back-pressure differ from brass, hardened steel, and ruby nozzles
-- **Extruder:** Stock P1S direct-drive extruder
-- **Cooling:** Stock part-cooling blower and auxiliary fan
-- **Firmware:** Current stable Bambu Lab firmware at the time of tuning
-- **AMS:** Optional; profiles do not assume AMS usage
-- **Bed:** Stock textured PEI plate unless otherwise noted
-- **Environment:** Room ambient around 72–80°F (22–27°C), measured *outside* the printer enclosure
+Printer: Bambu Lab P1S with factory motion system, belts, and cooling  
+Hotend: E3D DiamondBack 0.4 mm integrated assembly  
+• One‑piece sealed unit  
+• No removable nozzle  
+• Different melt zone and back‑pressure compared to brass or hardened steel  
+Extruder: Stock direct‑drive unit  
+Cooling: Stock part‑cooling blower and auxiliary fan  
+Firmware: Current stable release at the time of tuning  
+AMS: Optional; profiles do not rely on it  
+Bed: Stock textured PEI  
+Environment: Room ambient around 72–80 °F (22–27 °C), measured outside the enclosure
 
-Because the DiamondBack is a fully integrated hotend, all tuning values in this repository—flow ratio, pressure advance, cooling percentages, extrusion widths, and speed limits—are calibrated specifically for the DiamondBack’s extrusion characteristics and should not be expected to behave identically on other nozzle or hotend types.
-
----
+Because the DiamondBack is a complete hotend assembly, all tuning values — flow, pressure advance, cooling behavior, extrusion widths, and speed limits — reflect its melt characteristics. They won’t match what you’d expect from brass, hardened steel, or ruby nozzles.
 
 ## Included Profiles
 
-This repository contains:
-
-- **Printer Profiles**  
-  Tuned for the DiamondBack’s melt characteristics and extrusion behavior.
-
-- **Filament Profiles**  
-  Flow ratio, cooling, and PA calibrated per material.
-
-- **Process Profiles**  
-  Layer height, extrusion width, speed, and strength presets optimized for reliability and dimensional accuracy.
-
----
+Printer presets tuned for the DiamondBack’s melt behavior  
+Filament presets with calibrated flow, cooling, and PA  
+Process presets focused on dimensional accuracy, strength, and repeatability
 
 ## How to Import
 
-1. Download the `.ini` files from this repository.  
+1. Download the `.ini` files you want.  
 2. Open OrcaSlicer.  
-3. Go to **File → Import Presets**.  
-4. Import printer, filament, and process profiles as needed.  
-5. Restart OrcaSlicer to ensure all presets load correctly.
-
----
+3. Go to File → Import Presets.  
+4. Import printer, filament, and process profiles.  
+5. Restart OrcaSlicer so everything loads cleanly.
 
 ## Notes on Tuning
 
-These profiles were developed through iterative empirical testing, including:
-
-- Flow ratio calibration  
-- Pressure advance tuning  
-- Cooling curve validation  
-- Extrusion width and speed stability checks  
-- Strength and dimensional accuracy verification  
-
-The DiamondBack’s thermal stability and reduced wear allow for highly consistent extrusion, but its melt characteristics differ from brass and hardened steel. Users switching from non‑DiamondBack hotends should expect different PA and flow values.
-
----
+These profiles were built through hands‑on testing: flow calibration, pressure advance sweeps, cooling curve checks, extrusion width validation, and dimensional accuracy tests. The DiamondBack’s thermal stability and wear resistance make it extremely consistent, but its melt characteristics differ from traditional nozzles. Expect different PA and flow values if you’re coming from brass or hardened steel.
 
 ## License
 
