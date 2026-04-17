@@ -1,5 +1,5 @@
 # OrcaSlicer Profiles for Bambu P1S
-### ⚠️ Utilizes a E3D DiamondBack 0.4 mm nozzle/hotend assembly
+### ⚠️ Utilizes an E3D DiamondBack 0.4 mm nozzle/hotend assembly
 
 These profiles are tuned specifically for the Bambu Lab P1S equipped with the E3D DiamondBack 0.4 mm integrated hotend. With rigorous and passionate testing, consistent extrusion, predictable behavior, and reliable results across PCTG, PETG, PLA, and other engineering‑grade materials is provided with these profiles.
 
