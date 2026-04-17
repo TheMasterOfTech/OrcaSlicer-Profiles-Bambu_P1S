@@ -20,6 +20,29 @@ __*Environment:*__ Room ambient around 72–80 °F (22–27 °C), measured outsi
 
 The DiamondBack is a complete hotend drop-in assembly, so all tuning values — flow, pressure advance, cooling behavior, extrusion widths, and speed limits — reflect its melt characteristics. These values won’t match what you’d expect from brass, hardened steel, or ruby nozzles.
 
+## Repository Structure
+
+This project is organized into a small set of clear folders so you can quickly find printer, filament, and process profiles without digging through clutter.
+
+orcaslicer-profiles-bambu_p1s/
+│
+├── printer/
+│
+├── filament/
+│   ├── PLA/
+│   ├── PETG/
+│   ├── PCTG/
+│   └── ABS/
+│
+├── process/
+│
+├── examples/
+│
+├── docs/
+│
+└── README.md
+
+
 ## Included Profiles
 
 Printer presets tuned for the DiamondBack’s melt behavior  
