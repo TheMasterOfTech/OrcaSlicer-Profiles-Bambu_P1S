@@ -4,21 +4,21 @@ These profiles are tuned specifically for the Bambu Lab P1S equipped with the E3
 
 ## Hardware Assumptions
 
-Everything here is calibrated around a fixed hardware baseline so the profiles behave the same way for anyone using the same setup.
+Everything here is calibrated around a fixed hardware baseline so the profiles behave consistently for anyone using the same setup.
 
-Printer: Bambu Lab P1S with factory motion system, belts, and cooling  
-Hotend: E3D DiamondBack 0.4 mm integrated assembly  
+**Printer:** Bambu Lab P1S with factory motion system, belts, and cooling  
+**Hotend:** E3D DiamondBack 0.4 mm integrated assembly  
 • One‑piece sealed unit  
 • No removable nozzle  
 • Different melt zone and back‑pressure compared to brass or hardened steel  
-Extruder: Stock direct‑drive unit  
-Cooling: Stock part‑cooling blower and auxiliary fan  
-Firmware: Current stable release at the time of tuning  
-AMS: Optional; profiles do not rely on it  
-Bed: Stock textured PEI  
-Environment: Room ambient around 72–80 °F (22–27 °C), measured outside the enclosure
+**Extruder:** Stock direct‑drive unit  
+**Cooling:** Stock part‑cooling blower and auxiliary fan  
+**Firmware:** Current stable release at the time of tuning  
+**AMS:** Optional; profiles do not rely on it  
+**Bed:** Stock textured PEI  
+**Environment:** Room ambient around 72–80 °F (22–27 °C), measured outside the enclosure
 
-Because the DiamondBack is a complete hotend assembly, all tuning values — flow, pressure advance, cooling behavior, extrusion widths, and speed limits — reflect its melt characteristics. They won’t match what you’d expect from brass, hardened steel, or ruby nozzles.
+As the E3D 0.4mm DiamondBack is a complete hotend drop-in assembly, all tuning values — flow, pressure advance, cooling behavior, extrusion widths, and speed limits — reflect its melt characteristics. They won’t match what you’d expect from brass, hardened steel, or ruby nozzles.
 
 ## Included Profiles
 
