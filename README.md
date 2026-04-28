@@ -60,7 +60,7 @@ Each filament profile includes:
 ### Process Profiles
 Located under `process/`.
 
-- **PCTG & PETG – 0.20mm {DB} – P1S**
+- **PCTG – 0.20mm {DB} – P1S**
 
 Each process profile includes:
 - Speed hierarchy tuned for DiamondBack melt behavior  
