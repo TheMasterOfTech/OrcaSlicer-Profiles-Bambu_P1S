@@ -17,7 +17,7 @@ jobs:
         id: get_version
         run: |
           COMMIT_MSG="${{ github.event.head_commit.message }}"
-          if [[ "$COMMIT_MSG" =~ release:\ (v[0-9]+\.[0-9]+\.[0-9]+) ]]; then
+          if [[ "$COMMIT_MSG" =~ release:\ (v[0-9]+\.[0-9]+\.[0-9]+[-a-zA-Z0-9\.]*) ]]; then
             echo "version=${BASH_REMATCH[1]}" >> $GITHUB_OUTPUT
           else
             echo "No release tag found. Skipping."
