@@ -32,9 +32,7 @@ orcaslicer-profiles-bambu_p1s/
 │
 ├── process/
 │
-├── examples/
-│
-├── docs/
+├── RELEASE_NOTES.md
 │
 └── README.md
 ```
