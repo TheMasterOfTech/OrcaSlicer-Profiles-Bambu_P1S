@@ -27,14 +27,14 @@ jobs:
       - name: Stop if no version was found
         if: ${{ steps.get_version.outputs.version == '' }}
         run: echo "No release version found in commit message. Exiting."
-        
+
       - name: Create master ZIP
         if: ${{ steps.get_version.outputs.version != '' }}
         run: |
-        mkdir package
-        rsync -av --exclude='package' --exclude='.git' --exclude='.github' --exclude='*.zip' ./ package/OrcaSlicer-Profiles-Bambu_P1S
-        cd package
-        zip -r ../OrcaSlicer-Profiles-Bambu_P1S.zip OrcaSlicer-Profiles-Bambu_P1S
+          mkdir package
+          rsync -av --exclude='package' --exclude='.git' --exclude='.github' --exclude='*.zip' ./ package/OrcaSlicer-Profiles-Bambu_P1S
+          cd package
+          zip -r ../OrcaSlicer-Profiles-Bambu_P1S.zip OrcaSlicer-Profiles-Bambu_P1S
 
       - name: Create GitHub Release
         if: ${{ steps.get_version.outputs.version != '' }}
