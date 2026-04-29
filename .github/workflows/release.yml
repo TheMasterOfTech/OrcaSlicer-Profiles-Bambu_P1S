@@ -1,0 +1,47 @@
+name: Auto Release on Commit Message
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Extract version from commit message
+        id: get_version
+        run: |
+          COMMIT_MSG="${{ github.event.head_commit.message }}"
+          if [[ "$COMMIT_MSG" =~ release:\ (v[0-9]+\.[0-9]+\.[0-9]+) ]]; then
+            echo "version=${BASH_REMATCH[1]}" >> $GITHUB_OUTPUT
+          else
+            echo "No release tag found. Skipping."
+            echo "version=" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Stop if no version was found
+        if: ${{ steps.get_version.outputs.version == '' }}
+        run: echo "No release version found in commit message. Exiting."
+
+      - name: Create master ZIP
+        if: ${{ steps.get_version.outputs.version != '' }}
+        run: |
+          mkdir package
+          cp -r . package/OrcaSlicer-Profiles-Bambu_P1S
+          cd package
+          zip -r ../OrcaSlicer-Profiles-Bambu_P1S.zip OrcaSlicer-Profiles-Bambu_P1S
+
+      - name: Create GitHub Release
+        if: ${{ steps.get_version.outputs.version != '' }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.get_version.outputs.version }}
+          name: ${{ steps.get_version.outputs.version }}
+          files: OrcaSlicer-Profiles-Bambu_P1S.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
