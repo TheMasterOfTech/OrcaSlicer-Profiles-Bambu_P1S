@@ -72,7 +72,7 @@ Each process profile includes:
 1. Download the `OrcaSlicer-Profiles-Bambu_P1S.zip` file from the [latest release](https://github.com/TheMasterOfTech/OrcaSlicer-Profiles-Bambu_P1S/releases).
 2. Open OrcaSlicer.  
 3. Go to File → Import Presets.  
-4. Import printer, filament, and/or process profiles that you wish to.
+4. Import printer, filament, and/or process profiles that you wish to (they end in `.ini`).
 5. Restart OrcaSlicer so everything loads cleanly.
 
 ## Notes on Tuning
