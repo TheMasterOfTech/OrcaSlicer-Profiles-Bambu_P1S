@@ -1,0 +1,288 @@
+; Machine: P1S
+; Author: The Technical Ace (TTA)
+; Date: 05/03/2026
+; Start g-code version: 3.7
+
+;===== TURN ON THE HOTEND FAN (P1S) ====================
+M104 S75
+M710 A1 S255
+
+;===== RESET MACHINE STATUS ============================
+M17
+M290 X40 Y40 Z2.6666666
+G91
+M17 Z0.4
+G380 S2 Z30 F300
+G380 S2 Z-25 F300
+G1 Z5 F300
+G90
+M17 X1.2 Y1.2 Z0.75
+M960 S5 P1
+G90
+M220 S100
+M221 S100
+M73.2 R1.0
+M1002 set_gcode_claim_speed_level : 5
+M221 X0 Y0 Z0
+G29.1 Z{+0.0}
+M204 S10000
+
+;===== HEATBED PREHEAT ================================
+M1002 gcode_claim_action : 2
+M140 S[bed_temperature_initial_layer_single]
+
+;===== PLA JAM PREVENTION FANS ========================
+{if filament_type[initial_extruder]=="PLA"}
+    {if (bed_temperature[initial_extruder] >45)||(bed_temperature_initial_layer[initial_extruder] >45)}
+        M106 P3 S180
+    {endif}
+{endif}
+M106 P2 S100
+
+;===== PREPARE PRINT TEMPERATURE AND MATERIAL ==========
+M104 S[nozzle_temperature_initial_layer]
+G91
+G0 Z10 F1200
+G90
+G28 X
+M975 S1
+G1 X60 F12000
+G1 Y245
+G1 Y265 F3000
+M620 M
+M620 S[initial_extruder]A
+M109 S[nozzle_temperature_initial_layer]
+G1 X120 F12000
+
+G1 X20 Y50 F12000
+G1 Y-3
+T[initial_extruder]
+G1 X54 F12000
+G1 Y265
+M400
+M621 S[initial_extruder]A
+M620.1 E F{filament_max_volumetric_speed[initial_extruder]/2.4053*60} T{nozzle_temperature_range_high[initial_extruder]}
+
+M412 S1
+
+;===== FLUSH SEQUENCE (84 mm total prime) ==============
+M109 S250
+M106 P1 S0
+
+G92 E0
+G1 E40 F200        ; first prime
+M400
+
+M104 S[nozzle_temperature_initial_layer]
+G92 E0
+G1 E40 F200        ; second prime
+M400
+
+M106 P1 S255
+G92 E0
+G1 E4 F300         ; final small prime
+
+M109 S{nozzle_temperature_initial_layer[initial_extruder]-20}
+G92 E0
+G1 E-0.5 F300
+
+;===================================================================
+;===== SILICONE WIPER 5‑PASS CLEAN (60 mm/s, high‑stability mode)
+;===================================================================
+
+G1 X60 Y265 F18000
+G92 E0
+G1 E-0.5 F300
+
+; Pass 1: L → R (slight upward offset)
+G1 X100 Y265.3 F3600
+G1 Z0.05 F1200
+
+; Pass 2: R → L (slight downward offset)
+G1 X60 Y264.7 F3600
+G1 Z0.10 F1200
+
+; Pass 3: L → R (centered)
+G1 X100 Y265.0 F3600
+G1 Z0.15 F1200
+
+; Pass 4: R → L (centered)
+G1 X60 Y265.0 F3600
+G1 Z0.20 F1200
+
+; Pass 5: L → R (final wipe leading into scrub)
+G1 X100 Y265.0 F3600
+
+; Restore Z before scrub entry
+G1 Z-0.20 F1200
+
+;===================================================================
+;===== GYROID-STYLE SHEAR WAVE BACK TAB SCRUB ======================
+;===================================================================
+
+G92 E0
+G1 E-0.4 F2400
+
+G0 X125 Y260 Z1.0 F20000
+G1 Z-0.35 F1200
+
+G1 X126 Y259.0 F3000
+G1 X127 Y261.0
+G1 X128 Y259.0
+G1 X129 Y261.0
+G1 X130 Y259.0
+G1 X131 Y261.0
+G1 X132 Y259.0
+G1 X133 Y261.0
+G1 X134 Y259.0
+G1 X135 Y261.0
+G1 X136 Y259.0
+G1 X137 Y261.0
+
+G92 E0
+G1 E-0.2 F2400
+
+G1 X137 Y259.7 F6000
+
+G92 E0
+G1 E-0.3 F2400
+
+G0 Z2 F20000
+G0 X130 Y130 F20000
+
+;===== BED LEVELING ====================================
+M190 S[bed_temperature_initial_layer_single]
+M1002 judge_flag g29_before_print_flag
+M622 J1
+    M1002 gcode_claim_action : 1
+    G29 A1 X{first_layer_print_min[0]} Y{first_layer_print_min[1]} I{first_layer_print_size[0]} J{first_layer_print_size[1]}
+    M500
+M623
+
+;===== HOME AFTER WIPE MOUTH ===========================
+M1002 judge_flag g29_before_print_flag
+M622 J0
+    M1002 gcode_claim_action : 13
+    G28
+M623
+
+M975 S1
+
+;===== PLA JAM PREVENTION FANS =========================
+{if filament_type[initial_extruder]=="PLA"}
+    {if (bed_temperature[initial_extruder] >45)||(bed_temperature_initial_layer[initial_extruder] >45)}
+        M106 P3 S180
+    {endif}
+{endif}
+M106 P2 S100
+
+M104 S{nozzle_temperature_initial_layer[initial_extruder]}
+
+;===== UNIVERSAL POST-WIPE RE-PRIME ====================
+G92 E0
+G1 E0.6 F300
+
+;===== NOZZLE LOAD LINE STARTUP SEQUENCE ===============
+M975 S1
+G90
+M83
+T1000
+
+;===== PURGE SAFETY CHECK ==============================
+{if ((first_layer_print_min[0] - 5) < 18) and ((first_layer_print_min[1] - 5) < 28) or (first_layer_print_min[0] < 6) or (first_layer_print_min[1] < 6) or (first_layer_print_min[0] > 200)}
+
+    ;===== FALLBACK PURGE ROUTINE ========================
+    {if curr_bed_type == "Supertack Plate" or curr_bed_type == "Cool Plate" or curr_bed_type == "Textured Cool Plate"}
+        G0 X15 Y{28 - 2} Z2 F30000
+        G0 Z0
+        M109 S{nozzle_temperature_initial_layer[initial_extruder]}
+        G0 Z0.3 F18000
+        M400
+        G91
+
+        G1 Y-20 E10 F{outer_wall_volumetric_speed / (24 / 20) * 60}
+        G1 Z-0.1
+        G1 X2.4 E{0.3742 * 0.48} F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
+        G1 Y5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) * 60}
+        G1 Y5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
+        G1 Y5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) * 60}
+        G1 Y5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
+
+    {else}
+        G1 X90 Y-4 Z2 F18000
+        G0 Z0
+        M109 S{nozzle_temperature_initial_layer[initial_extruder]}
+        G1 Z0.3
+        M400
+        G91
+
+        G1 X20 E10 F{outer_wall_volumetric_speed / (24 / 20) * 60}
+        G1 Z-0.1
+        G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
+        G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) * 60}
+        G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
+        G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) * 60}
+        G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
+    {endif}
+
+    G1 E-0.3 F2400
+
+    G90
+    G1 Z{initial_layer_print_height + 0.3}
+    G0 X{first_layer_print_min[0] + (first_layer_print_size[0] / 2)} Y{first_layer_print_min[1]} F18000
+
+{else}
+
+    ;===== SAFE PURGE NEAR PRINT AREA ====================
+    G1 X{first_layer_print_min[0] - 5} Y{first_layer_print_min[1] - 5} Z1.5 F18000
+    G0 Z0
+    M109 S{nozzle_temperature_initial_layer[initial_extruder]}
+    G1 Z0.3
+    M400
+
+    ;===== XY-ALIGNED DRY GLIDE-IN =======================
+    G90
+    {if first_layer_print_min[1] - 5 < 5}
+        G1 Y5 F8000
+    {else}
+        G1 Y{first_layer_print_min[1] - 5} F8000
+    {endif}
+
+    G1 X{first_layer_print_min[0] - 10} F8000
+    G1 X{first_layer_print_min[0] - 5} F3000
+
+    G91
+
+    G1 X20 E10 F{outer_wall_volumetric_speed / (24 / 20) * 60}
+    G1 Z-0.1
+    G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
+    G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) * 60}
+    G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
+    G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) * 60}
+    G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
+
+    G1 E-0.3 F2400
+
+    G90
+    G1 Z{initial_layer_print_height + 0.3}
+    G0 X{first_layer_print_min[0] + (first_layer_print_size[0] / 2)} Y{first_layer_print_min[1]} F12000
+
+{endif}
+
+M400
+
+;===== TEXTURED PEI PLATE OFFSET =======================
+{if curr_bed_type=="Textured PEI Plate"}
+    G29.1 Z{-0.04}
+{endif}
+
+;===== FINALIZE & TURN OFF FANS ========================
+M1002 gcode_claim_action : 0
+M106 S0
+M106 P2 S0
+M106 P3 S0
+M221 R
+M975 S1
+
+;======================== CREDITS ========================
+; Adaptive Purge inspired by Simb, with refinements by TTA
