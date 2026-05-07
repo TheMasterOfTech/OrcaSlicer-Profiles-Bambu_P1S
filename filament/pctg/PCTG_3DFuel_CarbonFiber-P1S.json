@@ -6,7 +6,7 @@
         "75"
     ],
     "default_filament_colour": [
-        "#F1661B"
+        "#1C1F1C"
     ],
     "during_print_exhaust_fan_speed": [
         "75"
@@ -15,19 +15,19 @@
         "1"
     ],
     "eng_plate_temp": [
-        "65"
+        "60"
     ],
     "eng_plate_temp_initial_layer": [
-        "65"
+        "60"
     ],
     "fan_cooling_layer_time": [
         "25"
     ],
     "fan_max_speed": [
-        "60"
+        "65"
     ],
     "fan_min_speed": [
-        "40"
+        "45"
     ],
     "filament_deretraction_speed": [
         "45"
@@ -39,16 +39,19 @@
         "0.94"
     ],
     "filament_max_volumetric_speed": [
-        "24"
+        "18"
     ],
     "filament_retract_lift_enforce": [
         "Top and Bottom"
     ],
     "filament_retract_restart_extra": [
-        "0.004"
+        "0.007"
+    ],
+    "filament_retract_when_changing_layer": [
+        "0"
     ],
     "filament_retraction_length": [
-        "0.5"
+        "0.4"
     ],
     "filament_retraction_minimum_travel": [
         "1"
@@ -57,25 +60,28 @@
         "45"
     ],
     "filament_settings_id": [
-        "PCTG_3DFuel_UNIVERSAL {NON-FILLED}-P1S"
+        "PCTG_3DFuel_CarbonFiber-P1S"
+    ],
+    "filament_wipe": [
+        "0"
     ],
     "filament_z_hop": [
         "0.5"
     ],
     "from": "User",
     "hot_plate_temp": [
-        "65"
+        "60"
     ],
     "hot_plate_temp_initial_layer": [
-        "65"
+        "60"
     ],
     "inherits": "3D-Fuel PCTG Pro PCTG @Bambu Lab P1S 0.4 nozzle",
-    "name": "PCTG_3DFuel_UNIVERSAL {NON-FILLED}-P1S",
+    "name": "PCTG_3DFuel_CarbonFiber-P1S",
     "nozzle_temperature": [
-        "255"
+        "265"
     ],
     "nozzle_temperature_initial_layer": [
-        "255"
+        "265"
     ],
     "overhang_fan_speed": [
         "100"
@@ -84,28 +90,28 @@
         "50%"
     ],
     "pressure_advance": [
-        "0.0302"
+        "0.018"
     ],
     "slow_down_min_speed": [
         "40"
     ],
     "supertack_plate_temp": [
-        "30"
+        "25"
     ],
     "supertack_plate_temp_initial_layer": [
-        "30"
+        "25"
     ],
     "textured_cool_plate_temp": [
-        "35"
+        "30"
     ],
     "textured_cool_plate_temp_initial_layer": [
-        "35"
+        "30"
     ],
     "textured_plate_temp": [
-        "65"
+        "60"
     ],
     "textured_plate_temp_initial_layer": [
-        "65"
+        "60"
     ],
     "version": "1.9.0.26"
 }
