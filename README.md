@@ -40,7 +40,7 @@ orcaslicer-profiles-bambu_p1s/
 
 ## Filament & Process Profiles
 
-This repository includes tuned **filament** and **process** profiles for the Bambu Lab P1S using a 0.4 mm DiamondBack nozzle. Filament profiles are organized by material only. Specific brands or blends will be added later as they are tuned.
+This repository includes tuned **filament** and **process** profiles for the Bambu Lab P1S using a 0.4 mm DiamondBack nozzle. Filament profiles are organized by material only. Specific brands or blends will be added later as they are tuned if found necessary.
 
 <details>
 <summary><strong>Filament Profiles</strong></summary>
@@ -88,9 +88,11 @@ Each process profile includes:
 4. Import printer, filament, and/or process profiles that you wish to (they end in `.ini`).
 5. Restart OrcaSlicer so everything loads cleanly.
 
-## Notes on Tuning
+## Friendly Advisories
 
-These profiles were built through hands‑on testing: flow calibration, pressure advance (PA) sweeps, cooling curve checks, extrusion width validation, bridging and dimensional accuracy tests. The DiamondBack’s thermal stability and wear resistance make it extremely consistent, but its melt characteristics differ from traditional nozzles. Expect different PA and flow values if you’re coming from brass or hardened steel.
+These profiles were built through hands‑on testing: flow calibration, pressure advance (PA) sweeps, cooling curve checks, extrusion width validation, bridging tests, and dimensional accuracy verification. The DiamondBack’s thermal stability and wear resistance make it extremely consistent, but its melt characteristics differ from traditional nozzles. Expect different PA and flow values if you’re coming from brass or hardened steel.
+
+Respectfully, I will not be developing profiles for slicers outside of OrcaSlicer (such as Bambu Studio or PrusaSlicer). I exclusively use OrcaSlicer for all of my printers, and it isn’t practical for me to allocate time to maintain profiles for additional slicers. However, you’re welcome to message me if you’d like guidance on developing your own profiles for those platforms.
 
 ## License
 
