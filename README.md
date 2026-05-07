@@ -3,7 +3,7 @@
 
 These profiles are tuned specifically for the Bambu Lab P1S equipped with the E3D DiamondBack 0.4 mm integrated hotend. With rigorous and passionate testing, consistent extrusion, predictable behavior, and reliable results across PCTG, PETG, PLA, and other engineering‑grade materials is provided with these profiles.
 
-The DiamondBack is a complete hotend drop-in assembly, so all tuning values — flow, pressure advance, cooling behavior, extrusion widths, and speed limits — reflect its melt characteristics. As such, it is expected that these values won’t match what you’d expect from brass, hardened steel, or ruby nozzles.
+The DiamondBack is a complete hotend drop-in assembly, so all tuning values (flow, pressure advance, cooling behavior, extrusion widths, and speed limits) reflect its melt characteristics. As such, it is expected that these values won’t match what you’d expect from brass, hardened steel, or ruby nozzles.
 
 ## Hardware Setup & Environment
 
