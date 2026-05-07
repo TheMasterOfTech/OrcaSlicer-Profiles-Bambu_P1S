@@ -80,7 +80,7 @@ Each process profile includes:
 
 </details>
 
-## How to Import
+### How to Import
 
 1. Download the `OrcaSlicer-Profiles-Bambu_P1S.zip` file from the [latest release](https://github.com/TheMasterOfTech/OrcaSlicer-Profiles-Bambu_P1S/releases).
 2. Open OrcaSlicer.  
