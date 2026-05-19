@@ -1,7 +1,7 @@
 ; Machine: P1S
 ; Author: The Technical Ace (TTA)
 ; Date: 05/13/2026
-; Start g-code version: 4.1
+; Start g-code version: 4.2
 
 ;===== TURN ON THE HOTEND FAN (P1S) ====================
 M104 S75
@@ -149,18 +149,6 @@ G1 E-0.3 F2400
 
 G0 Z2 F20000
 G0 X130 Y130 F20000
-
-;===================================================================
-;===== Z AXIS STEP-SKIP SAFETY CHECK ===============================
-;===================================================================
-
-M1002 judge_flag z_axis_skip_flag
-M622 J1
-    M1002 gcode_claim_action : 14
-    G380 S2 Z30 F300
-    G380 S2 Z-25 F300
-    G1 Z5 F300
-M623
 
 ;===== BED LEVELING ====================================
 M190 S[bed_temperature_initial_layer_single]
