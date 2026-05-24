@@ -1,7 +1,7 @@
 ; Machine: P1S
 ; Author: The Technical Ace (TTA)
 ; Date: 05/13/2026
-; Start g-code version: 4.2
+; Start g-code version: 4.2.1
 
 ;===== TURN ON THE HOTEND FAN (P1S) ====================
 M104 S75
@@ -70,50 +70,50 @@ M109 S250
 M106 P1 S0
 
 G92 E0
-G1 E40 F200        ; first prime
+G1 E40 F200
 M400
 
 M104 S[nozzle_temperature_initial_layer]
 G92 E0
-G1 E40 F200        ; second prime
+G1 E40 F200
 M400
 
 M106 P1 S255
 G92 E0
-G1 E4 F300         ; final small prime
+G1 E4 F300
 
 M109 S{nozzle_temperature_initial_layer[initial_extruder]-20}
 G92 E0
-G1 E-0.5 F300
+G1 E-{retraction_length[initial_extruder]} F{retraction_speed[initial_extruder] * 60}
 
 ;===================================================================
-;===== SILICONE WIPER 5‑PASS CLEAN (60 mm/s, high‑stability mode)
+;===== SILICONE WIPER 5‑PASS CLEAN ================================
 ;===================================================================
 
 G1 X60 Y265 F18000
 G92 E0
-G1 E-0.5 F300
+G1 E-{retraction_length[initial_extruder]} F{retraction_speed[initial_extruder] * 60}
 
-; Pass 1: L → R (slight upward offset)
+; Pass 1
 G1 X100 Y265.3 F3600
 G1 Z0.05 F1200
 
-; Pass 2: R → L (slight downward offset)
+; Pass 2
 G1 X60 Y264.7 F3600
 G1 Z0.10 F1200
 
-; Pass 3: L → R (centered)
+; Pass 3
 G1 X100 Y265.0 F3600
 G1 Z0.15 F1200
 
-; Pass 4: R → L (centered)
+; Pass 4
 G1 X60 Y265.0 F3600
 G1 Z0.20 F1200
 
-; Pass 5: L → R (final wipe leading into scrub)
+; Pass 5
 G1 X100 Y265.0 F3600
 
-; Restore Z before scrub entry
+; Restore Z
 G1 Z-0.20 F1200
 
 ;===================================================================
@@ -121,7 +121,7 @@ G1 Z-0.20 F1200
 ;===================================================================
 
 G92 E0
-G1 E-0.4 F2400
+G1 E-{retraction_length[initial_extruder]} F{retraction_speed[initial_extruder] * 60}
 
 G0 X125 Y260 Z1.0 F20000
 G1 Z-0.35 F1200
@@ -140,12 +140,12 @@ G1 X136 Y259.0
 G1 X137 Y261.0
 
 G92 E0
-G1 E-0.2 F2400
+G1 E-{retraction_length[initial_extruder]} F{retraction_speed[initial_extruder] * 60}
 
 G1 X137 Y259.7 F6000
 
 G92 E0
-G1 E-0.3 F2400
+G1 E-{retraction_length[initial_extruder]} F{retraction_speed[initial_extruder] * 60}
 
 G0 Z2 F20000
 G0 X130 Y130 F20000
@@ -180,7 +180,7 @@ M104 S{nozzle_temperature_initial_layer[initial_extruder]}
 
 ;===== UNIVERSAL POST-WIPE RE-PRIME ====================
 G92 E0
-G1 E0.6 F300
+G1 E{retraction_length[initial_extruder]} F{deretraction_speed[initial_extruder] * 60}
 
 ;===== NOZZLE LOAD LINE STARTUP SEQUENCE ===============
 M975 S1
@@ -225,7 +225,7 @@ T1000
         G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
     {endif}
 
-    G1 E-0.3 F2400
+    G1 E-{retraction_length[initial_extruder]} F{retraction_speed[initial_extruder] * 60}
 
     G90
     G1 Z{initial_layer_print_height + 0.3}
@@ -261,7 +261,7 @@ T1000
     G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) * 60}
     G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
 
-    G1 E-0.3 F2400
+    G1 E-{retraction_length[initial_extruder]} F{retraction_speed[initial_extruder] * 60}
 
     G90
     G1 Z{initial_layer_print_height + 0.3}
