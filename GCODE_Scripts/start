@@ -1,7 +1,7 @@
 ; Machine: P1S
 ; Author: The Technical Ace (TTA)
-; Date: 05/13/2026
-; Start g-code version: 4.2.1
+; Date: 05/24/2026
+; Start g-code version: 4.2.3
 
 ;===== TURN ON THE HOTEND FAN (P1S) ====================
 M104 S75
@@ -200,6 +200,9 @@ T1000
         M400
         G91
 
+        ;--- USE WALL PRINT ACCEL FOR PURGE EXTRUSION ---
+        M204 P{outer_wall_acceleration[initial_extruder]}
+
         G1 Y-20 E10 F{outer_wall_volumetric_speed / (24 / 20) * 60}
         G1 Z-0.1
         G1 X2.4 E{0.3742 * 0.48} F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
@@ -215,6 +218,9 @@ T1000
         G1 Z0.3
         M400
         G91
+
+        ;--- USE WALL PRINT ACCEL FOR PURGE EXTRUSION ---
+        M204 P{outer_wall_acceleration[initial_extruder]}
 
         G1 X20 E10 F{outer_wall_volumetric_speed / (24 / 20) * 60}
         G1 Z-0.1
@@ -252,6 +258,9 @@ T1000
     G1 X{first_layer_print_min[0] - 5} F3000
 
     G91
+
+    ;--- USE WALL PRINT ACCEL FOR PURGE EXTRUSION ---
+    M204 P{outer_wall_acceleration[initial_extruder]}
 
     G1 X20 E10 F{outer_wall_volumetric_speed / (24 / 20) * 60}
     G1 Z-0.1
