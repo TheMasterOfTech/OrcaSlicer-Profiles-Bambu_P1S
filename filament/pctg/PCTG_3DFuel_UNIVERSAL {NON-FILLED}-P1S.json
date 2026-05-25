@@ -1,33 +1,30 @@
 {
     "close_fan_the_first_x_layers": [
-        "2"
+        "1"
     ],
     "complete_print_exhaust_fan_speed": [
-        "75"
+        "65"
     ],
     "default_filament_colour": [
         "#F1661B"
     ],
+    "dont_slow_down_outer_wall": [
+        "1"
+    ],
     "during_print_exhaust_fan_speed": [
-        "75"
+        "65"
     ],
     "enable_pressure_advance": [
         "1"
-    ],
-    "eng_plate_temp": [
-        "65"
-    ],
-    "eng_plate_temp_initial_layer": [
-        "65"
     ],
     "fan_cooling_layer_time": [
         "25"
     ],
     "fan_max_speed": [
-        "60"
+        "50"
     ],
     "fan_min_speed": [
-        "40"
+        "30"
     ],
     "filament_deretraction_speed": [
         "45"
@@ -39,16 +36,16 @@
         "0.94"
     ],
     "filament_max_volumetric_speed": [
-        "24"
+        "20"
+    ],
+    "filament_retract_before_wipe": [
+        "nil"
     ],
     "filament_retract_lift_enforce": [
         "Top and Bottom"
     ],
-    "filament_retract_restart_extra": [
-        "0.004"
-    ],
     "filament_retraction_length": [
-        "0.5"
+        "0.4"
     ],
     "filament_retraction_minimum_travel": [
         "1"
@@ -63,13 +60,13 @@
         "0.5"
     ],
     "from": "User",
-    "hot_plate_temp": [
-        "65"
-    ],
-    "hot_plate_temp_initial_layer": [
-        "65"
+    "full_fan_speed_layer": [
+        "5"
     ],
     "inherits": "3D-Fuel PCTG Pro PCTG @Bambu Lab P1S 0.4 nozzle",
+    "internal_bridge_fan_speed": [
+        "32"
+    ],
     "name": "PCTG_3DFuel_UNIVERSAL {NON-FILLED}-P1S",
     "nozzle_temperature": [
         "255"
@@ -78,13 +75,13 @@
         "255"
     ],
     "overhang_fan_speed": [
-        "100"
+        "96"
     ],
     "overhang_fan_threshold": [
         "50%"
     ],
     "pressure_advance": [
-        "0.0302"
+        "0.041"
     ],
     "slow_down_min_speed": [
         "40"
@@ -95,17 +92,14 @@
     "supertack_plate_temp_initial_layer": [
         "30"
     ],
+    "support_material_interface_fan_speed": [
+        "50"
+    ],
     "textured_cool_plate_temp": [
-        "35"
+        "30"
     ],
     "textured_cool_plate_temp_initial_layer": [
-        "35"
-    ],
-    "textured_plate_temp": [
-        "65"
-    ],
-    "textured_plate_temp_initial_layer": [
-        "65"
+        "30"
     ],
     "version": "1.9.0.26"
 }

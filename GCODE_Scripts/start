@@ -1,6 +1,6 @@
 ; Machine: P1S
 ; Author: The Technical Ace (TTA)
-; Start g-code version: 2026-05-25_v4.2.3
+; Start g-code version: 2026-05-25_v4.2.4
 
 ;===== TURN ON THE HOTEND FAN (P1S) ====================
 M104 S75

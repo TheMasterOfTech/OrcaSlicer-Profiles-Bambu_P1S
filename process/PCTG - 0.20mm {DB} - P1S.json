@@ -40,6 +40,7 @@
     "min_bead_width": "95%",
     "min_skirt_length": "15",
     "name": "PCTG - 0.20mm {DB} - P1S",
+    "notes": "; Machine: P1S\n; Author: The Technical Ace (TTA)\n; Process Settings Version: 2026-05-25_v4.2.4",
     "only_one_wall_top": "0",
     "outer_wall_acceleration": "1200",
     "outer_wall_jerk": "5",
