@@ -1,105 +1,102 @@
 {
-    "close_fan_the_first_x_layers": [
-        "1"
-    ],
-    "complete_print_exhaust_fan_speed": [
-        "65"
-    ],
-    "default_filament_colour": [
-        "#F1661B"
-    ],
-    "dont_slow_down_outer_wall": [
-        "1"
-    ],
-    "during_print_exhaust_fan_speed": [
-        "65"
-    ],
-    "enable_pressure_advance": [
-        "1"
-    ],
-    "fan_cooling_layer_time": [
-        "25"
-    ],
-    "fan_max_speed": [
-        "50"
-    ],
-    "fan_min_speed": [
-        "30"
-    ],
-    "filament_deretraction_speed": [
-        "45"
-    ],
-    "filament_extruder_variant": [
-        "Direct Drive Standard"
-    ],
-    "filament_flow_ratio": [
-        "0.94"
-    ],
-    "filament_max_volumetric_speed": [
-        "20"
-    ],
-    "filament_retract_before_wipe": [
-        "nil"
-    ],
-    "filament_retract_lift_enforce": [
-        "Top and Bottom"
-    ],
-    "filament_retraction_length": [
-        "0.4"
-    ],
-    "filament_retraction_minimum_travel": [
-        "1"
-    ],
-    "filament_retraction_speed": [
-        "45"
-    ],
-    "filament_settings_id": [
-        "PCTG_3DFuel_UNIVERSAL {NON-FILLED}-P1S"
-    ],
-    "filament_z_hop": [
-        "0.5"
-    ],
-    "from": "User",
-    "full_fan_speed_layer": [
-        "5"
-    ],
-    "inherits": "3D-Fuel PCTG Pro PCTG @Bambu Lab P1S 0.4 nozzle",
-    "internal_bridge_fan_speed": [
-        "32"
-    ],
-    "name": "PCTG_3DFuel_UNIVERSAL {NON-FILLED}-P1S",
-    "nozzle_temperature": [
-        "255"
-    ],
-    "nozzle_temperature_initial_layer": [
-        "255"
-    ],
-    "overhang_fan_speed": [
-        "96"
-    ],
-    "overhang_fan_threshold": [
-        "50%"
-    ],
-    "pressure_advance": [
-        "0.041"
-    ],
-    "slow_down_min_speed": [
-        "40"
-    ],
-    "supertack_plate_temp": [
-        "30"
-    ],
-    "supertack_plate_temp_initial_layer": [
-        "30"
-    ],
-    "support_material_interface_fan_speed": [
-        "50"
-    ],
-    "textured_cool_plate_temp": [
-        "30"
-    ],
-    "textured_cool_plate_temp_initial_layer": [
-        "30"
-    ],
-    "version": "1.9.0.26"
+	"close_fan_the_first_x_layers": [
+		"1"
+	],
+	"complete_print_exhaust_fan_speed": [
+		"65"
+	],
+	"default_filament_colour": [
+		"#F1661B"
+	],
+	"dont_slow_down_outer_wall": [
+		"1"
+	],
+	"during_print_exhaust_fan_speed": [
+		"65"
+	],
+	"enable_pressure_advance": [
+		"1"
+	],
+	"fan_cooling_layer_time": [
+		"25"
+	],
+	"fan_max_speed": [
+		"50"
+	],
+	"fan_min_speed": [
+		"30"
+	],
+	"filament_deretraction_speed": [
+		"45"
+	],
+	"filament_extruder_variant": [
+		"Direct Drive Standard"
+	],
+	"filament_flow_ratio": [
+		"0.94"
+	],
+	"filament_max_volumetric_speed": [
+		"20"
+	],
+	"filament_retract_lift_enforce": [
+		"Top and Bottom"
+	],
+	"filament_retraction_length": [
+		"0.4"
+	],
+	"filament_retraction_minimum_travel": [
+		"1"
+	],
+	"filament_retraction_speed": [
+		"45"
+	],
+	"filament_settings_id": [
+		"PCTG_3DFuel_UNIVERSAL {NON-FILLED}-P1S"
+	],
+	"filament_z_hop": [
+		"0.5"
+	],
+	"from": "User",
+	"full_fan_speed_layer": [
+		"5"
+	],
+	"inherits": "3D-Fuel PCTG Pro PCTG @Bambu Lab P1S 0.4 nozzle",
+	"internal_bridge_fan_speed": [
+		"32"
+	],
+	"name": "PCTG_3DFuel_UNIVERSAL {NON-FILLED}-P1S",
+	"nozzle_temperature": [
+		"255"
+	],
+	"nozzle_temperature_initial_layer": [
+		"255"
+	],
+	"overhang_fan_speed": [
+		"96"
+	],
+	"overhang_fan_threshold": [
+		"50%"
+	],
+	"pressure_advance": [
+		"0.041"
+	],
+	"slow_down_min_speed": [
+		"40"
+	],
+	"supertack_plate_temp": [
+		"30"
+	],
+	"supertack_plate_temp_initial_layer": [
+		"30"
+	],
+	"support_material_interface_fan_speed": [
+		"50"
+	],
+	"textured_cool_plate_temp": [
+		"30"
+	],
+	"textured_cool_plate_temp_initial_layer": [
+		"30"
+	],
+	"version": "1.9.0.26"
 }
