@@ -1,6 +1,8 @@
 # OrcaSlicer Profiles for Bambu P1S
 [![Latest Release](https://img.shields.io/github/v/release/TheMasterOfTech/OrcaSlicer-Profiles-Bambu_P1S?label=Latest%20release&color=0A3C7D&style=for-the-badge)](https://github.com/TheMasterOfTech/OrcaSlicer-Profiles-Bambu_P1S/releases)
-### ⚠️ Utilizes an E3D DiamondBack 0.4 mm nozzle/hotend assembly
+### ⚠️ Utilizes an E3D DiamondBack 0.4mm nozzle/hotend assembly. 
+
+#### Please declare <ins>STANDARD FLOW</ins> in OrcaSlicer when using these profiles!
 
 These profiles are tuned specifically for the Bambu Lab P1S equipped with the E3D DiamondBack 0.4 mm integrated hotend. With rigorous and passionate testing, consistent extrusion, predictable behavior, and reliable results across PCTG, PETG, PLA, and other engineering‑grade materials is provided with these profiles.
 
@@ -10,7 +12,6 @@ The DiamondBack is a complete hotend drop-in assembly, so all tuning values (flo
 
 __*Printer:*__ Bambu Lab P1S with factory motion system, belts, and cooling <br>
 __*Hotend:*__ E3D DiamondBack 0.4mm (complete hotend) <br>
-• ⚠️ Declare **STANDARD FLOW** in OrcaSlicer  
 • One‑piece sealed unit  
 • No removable nozzle  
 • Different melt zone and back‑pressure compared to brass or hardened steel <br>
