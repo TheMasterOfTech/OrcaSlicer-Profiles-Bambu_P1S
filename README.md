@@ -10,7 +10,7 @@ The DiamondBack is a complete hotend drop-in assembly, so all tuning values (flo
 
 __*Printer:*__ Bambu Lab P1S with factory motion system, belts, and cooling <br>
 __*Hotend:*__ E3D DiamondBack 0.4mm (complete hotend) <br>
-• ⚠️ DECLARE STANDARD FLOW in OrcaSlicer
+• ⚠️ Declare **STANDARD FLOW** in OrcaSlicer  
 • One‑piece sealed unit  
 • No removable nozzle  
 • Different melt zone and back‑pressure compared to brass or hardened steel <br>
