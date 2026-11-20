@@ -13,7 +13,7 @@ __*Hotend:*__ E3D DiamondBack 0.4mm (complete hotend) <br>
 • One‑piece sealed unit  
 • No removable nozzle  
 • Different melt zone and back‑pressure compared to brass or hardened steel <br>
-__*Build Surface:*__ [West3D Black Textured PEI](https://west3d.com/products/bambu-double-sided-texture-black-pei-pro-by-west3d)<br>
+__*Build Surface:*__ [Darkmoon G10 Garolite]([https://west3d.com/products/bambu-double-sided-texture-black-pei-pro-by-west3d](https://darkmoon3d.com/products/bambu-lab-g10-build-plate?srsltid=AYCX9vKSJnSOwNOK1p9IAI0jIKtzc5Pm4E3Hw8gpdddyEbRckVLzglgK))<br>
 __*Extruder:*__ Stock direct‑drive unit  
 __*Cooling:*__ Stock part‑cooling blower and auxiliary fan  
 __*Firmware:*__ Current stable release at the time of tuning  
