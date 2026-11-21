@@ -1,6 +1,6 @@
 ; Machine: P1S
 ; Author: The Technical Ace (TTA)
-; Start g-code version: 2026-07-03_v5.0.0
+; Start g-code version: 2026-11-19_v5.1.0
 
 ;===== TURN ON THE HOTEND FAN (P1S) ====================
 M104 S75
@@ -39,18 +39,22 @@ M140 S[bed_temperature_initial_layer_single]
 M106 P2 S100
 
 ;===== PREPARE PRINT TEMPERATURE AND MATERIAL ==========
-M104 S[nozzle_temperature_initial_layer]
+M104 S75
+
 G91
 G0 Z10 F1200
 G90
+
 G28 X
 M975 S1
+
 G1 X60 F12000
 G1 Y245
 G1 Y265 F3000
+
 M620 M
 M620 S[initial_extruder]A
-M109 S[nozzle_temperature_initial_layer]
+
 G1 X120 F12000
 
 G1 X20 Y50 F12000
@@ -58,40 +62,44 @@ G1 Y-3
 T[initial_extruder]
 G1 X54 F12000
 G1 Y265
+
 M400
 M621 S[initial_extruder]A
-M620.1 E F{filament_max_volumetric_speed[initial_extruder]/2.4053*60} T{nozzle_temperature_range_high[initial_extruder]}
+
+;===== AMS-SAFE UNIVERSAL LINE (STOCK-CORRECT) =========
+M620.1 E F{flush_volumetric_speeds[initial_no_support_extruder]/2.4053*60} T{flush_temperatures[initial_no_support_extruder]}
 
 M412 S1
 
 ;===== FLUSH SEQUENCE (84 mm total prime) ==============
-M109 S250
+M109 S{nozzle_temperature_initial_layer[initial_extruder]}
 M106 P1 S0
 
 G92 E0
 G1 E40 F200
 M400
 
-M104 S[nozzle_temperature_initial_layer]
+M104 S140
+
 G92 E0
 G1 E40 F200
 M400
 
+; Universal fan blast (restored to 255)
 M106 P1 S255
+
 G92 E0
 G1 E4 F300
+M400
 
-M109 S{nozzle_temperature_initial_layer[initial_extruder]-20}
 G92 E0
-G1 E-{retraction_length[initial_extruder] - 0.1} F{retraction_speed[initial_extruder] * 60}
+G1 E-{retraction_length[initial_extruder]} F{retraction_speed[initial_extruder] * 60}
 
 ;===================================================================
-;===== SILICONE WIPER 5‑PASS CLEAN ================================
+;===== SILICONE WIPER 5-PASS CLEAN ================================
 ;===================================================================
 
 G1 X60 Y265 F18000
-G92 E0
-G1 E-{retraction_length[initial_extruder] - 0.1} F{retraction_speed[initial_extruder] * 60}
 
 ; Pass 1
 G1 X100 Y265.3 F3600
@@ -112,14 +120,18 @@ G1 Z0.20 F1200
 ; Pass 5
 G1 X100 Y265.0 F3600
 
-;===== SMOOTH TRANSITION INTO BACK TAB =================
+; Restore Z
 G1 Z-0.20 F1200
-G1 X125 Y260 F6000
-G1 Z-0.35 F1200
 
 ;===================================================================
-;===== BACK TAB SCRUB – GYROID SHEAR WAVE ==========================
+;===== GYROID-STYLE SHEAR WAVE BACK TAB SCRUB ======================
 ;===================================================================
+
+G92 E0
+G1 E-{retraction_length[initial_extruder]} F{retraction_speed[initial_extruder] * 60}
+
+G0 X125 Y260 Z1.0 F20000
+G1 Z-0.35 F1200
 
 G1 X126 Y259.0 F3000
 G1 X127 Y261.0
@@ -134,16 +146,29 @@ G1 X135 Y261.0
 G1 X136 Y259.0
 G1 X137 Y261.0
 
-; Single retract after scrub
 G92 E0
-G1 E-{retraction_length[initial_extruder] - 0.1} F{retraction_speed[initial_extruder] * 60}
+G1 E-{retraction_length[initial_extruder]} F{retraction_speed[initial_extruder] * 60}
 
-; Exit from back tab
-G0 Z2 F20000
+G1 X137 Y259.7 F6000
+
+G92 E0
+G1 E-{retraction_length[initial_extruder]} F{retraction_speed[initial_extruder] * 60}
+
+;===== PRE-AUTOLEVEL NOZZLE PARK =======================
+G0 Z5 F20000
+G0 X137 Y265 F20000
+M400
+
+;===== PRE-AUTOLEVEL NOZZLE COOL DOWN ==================
+M104 S140
+M109 S140
+
+M190 S[bed_temperature_initial_layer_single]
+M400
+
 G0 X130 Y130 F20000
 
 ;===== BED LEVELING ====================================
-M190 S[bed_temperature_initial_layer_single]
 M1002 judge_flag g29_before_print_flag
 M622 J1
     M1002 gcode_claim_action : 1
@@ -168,7 +193,11 @@ M975 S1
 {endif}
 M106 P2 S100
 
-M104 S{nozzle_temperature_initial_layer[initial_extruder]}
+;===== UNIVERSAL POST-WIPE RE-PRIME ====================
+M109 S{nozzle_temperature_initial_layer[initial_extruder]}
+
+G92 E0
+G1 E{retraction_length[initial_extruder]} F{deretraction_speed[initial_extruder] * 60}
 
 ;===== NOZZLE LOAD LINE STARTUP SEQUENCE ===============
 M975 S1
@@ -179,19 +208,22 @@ T1000
 ;===== PURGE SAFETY CHECK ==============================
 {if ((first_layer_print_min[0] - 5) < 18) and ((first_layer_print_min[1] - 5) < 28) or (first_layer_print_min[0] < 6) or (first_layer_print_min[1] < 6) or (first_layer_print_min[0] > 200)}
 
-    ;===== FALLBACK PURGE ROUTINE ========================
     {if curr_bed_type == "Supertack Plate" or curr_bed_type == "Cool Plate" or curr_bed_type == "Textured Cool Plate"}
-        G0 X15 Y{28 - 2} Z2 F30000
-        G0 Z0.20
-        M109 S{nozzle_temperature_initial_layer[initial_extruder]}
-        G0 Z0.20
-        M400
-        G91
 
+        G0 X15 Y{28 - 2} Z2 F30000
+        G0 Z0.35
+        M109 S{nozzle_temperature_initial_layer[initial_extruder]}
+
+        G91
+        G1 Z-0.10 F1200
+        G90
+
+        M400
         M204 P{outer_wall_acceleration[initial_extruder]}
 
+        G91
         G1 Y-20 E10 F{outer_wall_volumetric_speed / (24 / 20) * 60}
-        G1 Z-0.05
+        G1 Z0
         G1 X2.4 E{0.3742 * 0.48} F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
         G1 Y5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) * 60}
         G1 Y5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
@@ -199,40 +231,40 @@ T1000
         G1 Y5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
 
     {else}
-        G1 X90 Y-4 Z2 F18000
-        G0 Z0.20
-        M109 S{nozzle_temperature_initial_layer[initial_extruder]}
-        G1 Z0.20
-        M400
-        G91
 
+        G1 X90 Y-4 Z2 F18000
+        G0 Z0.35
+        M109 S{nozzle_temperature_initial_layer[initial_extruder]}
+
+        G91
+        G1 Z-0.10 F1200
+        G90
+
+        M400
         M204 P{outer_wall_acceleration[initial_extruder]}
 
+        G91
         G1 X20 E10 F{outer_wall_volumetric_speed / (24 / 20) * 60}
-        G1 Z-0.05
         G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
         G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) * 60}
         G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
         G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) * 60}
         G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
+
     {endif}
-
-    G1 E-{retraction_length[initial_extruder] - 0.1} F{retraction_speed[initial_extruder] * 60}
-
-    G90
-    G1 Z{initial_layer_print_height + 0.3}
-    G0 X{first_layer_print_min[0] + (first_layer_print_size[0] / 2)} Y{first_layer_print_min[1]} F18000
 
 {else}
 
-    ;===== SAFE PURGE NEAR PRINT AREA ====================
     G1 X{first_layer_print_min[0] - 5} Y{first_layer_print_min[1] - 5} Z1.5 F18000
-    G0 Z0.20
+    G0 Z0.35
     M109 S{nozzle_temperature_initial_layer[initial_extruder]}
-    G1 Z0.25
+
+    G91
+    G1 Z-0.10 F1200
+    G90
+
     M400
 
-    G90
     {if first_layer_print_min[1] - 5 < 5}
         G1 Y5 F8000
     {else}
@@ -243,24 +275,28 @@ T1000
     G1 X{first_layer_print_min[0] - 5} F3000
 
     G91
-
     M204 P{outer_wall_acceleration[initial_extruder]}
 
     G1 X20 E10 F{outer_wall_volumetric_speed / (24 / 20) * 60}
-    G1 Z-0.05
     G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
     G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) * 60}
     G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
     G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) * 60}
     G1 X5 E0.3742 F{outer_wall_volumetric_speed / (0.3 * 0.5) / 4 * 60}
-
-    G1 E-{retraction_length[initial_extruder] - 0.1} F{retraction_speed[initial_extruder] * 60}
-
-    G90
-    G1 Z{initial_layer_print_height + 0.3}
-    G0 X{first_layer_print_min[0] + (first_layer_print_size[0] / 2)} Y{first_layer_print_min[1]} F12000
 
 {endif}
+
+;===== PURGE FINISH / PRESSURE CONTROL =================
+G90
+M400
+
+G92 E0
+G1 E-{retraction_length[initial_extruder] * 0.5} F{retraction_speed[initial_extruder] * 60}
+
+G90
+G1 Z{initial_layer_print_height + 0.3} F1200
+
+G0 X{first_layer_print_min[0] + (first_layer_print_size[0] / 2)} Y{first_layer_print_min[1]} F12000
 
 M400
 
@@ -271,10 +307,11 @@ M400
 
 ;===== FINALIZE & TURN OFF FANS ========================
 M1002 gcode_claim_action : 0
+
 M106 S0
 M106 P2 S0
 M106 P3 S0
-M960 S5 P0        ; turn off logo lamp
+
 M221 R
 M975 S1
 
